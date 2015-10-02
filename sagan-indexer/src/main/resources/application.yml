@@ -70,8 +70,8 @@ github:
   # Coordinates for finding guides against the GitHub API
   guides:
     owner:
-      name: ${GITHUB_GUIDES_OWNER_NAME:spring-guides} # any GitHub org or user having publicly-readable guide repos
-      type: ${GITHUB_GUIDES_OWNER_TYPE:orgs}          # 'users' is the other possible value
+      name: ${GITHUB_GUIDES_OWNER_NAME:tec-stack} # any GitHub org or user having publicly-readable guide repos
+      type: ${GITHUB_GUIDES_OWNER_TYPE:users}          # 'users' is the other possible value
 
 server:
     port: 9000

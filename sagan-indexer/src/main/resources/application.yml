@@ -27,7 +27,7 @@ security:
   basic:
     enabled: false
   user:
-    password: ${ADMIN_PASSWORD:}
+    password: carlsagan
 
 search:
   indexer:

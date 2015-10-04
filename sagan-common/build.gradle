@@ -62,7 +62,7 @@ dependencies {
     // for use in rendering AsciiDoc-based guide content to HTML
     compile 'org.asciidoctor:asciidoctorj:1.5.2'
 
-    testUtilCompile "junit:junit"
+    compile "junit:junit"
     testUtilCompile sourceSets.main.output
     testUtilCompile configurations.compile
     testUtilRuntime configurations.runtime

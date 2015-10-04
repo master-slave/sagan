@@ -40,7 +40,7 @@ security:
   headers:
     hsts: domain
   user:
-    password: ${ADMIN_PASSWORD:}
+    password: carlsagan
 
 github:
 

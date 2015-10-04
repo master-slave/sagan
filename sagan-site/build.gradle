@@ -1,3 +1,13 @@
+apply plugin: 'war'
+
+war {
+    baseName = 'sagan'
+    version =  '1.0.0'
+}
+
+configurations {
+    providedRuntime
+}
 
 springBoot {
     mainClass = 'sagan.SiteMain'
@@ -38,8 +48,10 @@ dependencies {
     compile 'org.tuckey:urlrewritefilter:4.0.4'
 
     // for use in mocking http interactions
-    testCompile "org.springframework:spring-test"
+    compile "org.springframework:spring-test"
 
     // pick up common test utility classes
-    testCompile project(':sagan-common').sourceSets.testUtil.output
+    compile project(':sagan-common').sourceSets.testUtil.output
+
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }

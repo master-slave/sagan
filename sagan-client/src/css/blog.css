@@ -31,10 +31,10 @@
   margin-bottom: 12px;
   line-height: 35px;
   font-family: "Montserrat", sans-serif;
-  color: #34302d;
+  color: blue;
 }
 .blog--container .blog--title a {
-  color: #34302d;
+  color: blue;
   font-weight: normal;
 }
 .blog--container .blog--title a:hover {
@@ -60,7 +60,7 @@
 }
 
 .blog--container .meta-data--container .meta-data--item a {
-  color: #34302d;
+  color: blue;
 }
 .blog--container .meta-data--container .meta-data--item a:hover {
   text-decoration: none;
@@ -97,7 +97,7 @@
   display: block;
   margin-left: -1em;
   vertical-align: text-top;
-  color: #34302d;
+  color: blue;
 }
 .blog--container .blog--post h2>a.anchor:before, .blog--container .blog--post h3>a.anchor:before,
 .blog--container .blog--post h4>a.anchor:before {
@@ -161,7 +161,7 @@
   margin-left: 633px;
 }
 .blog--container .blog--post .callout {
-  border-left: 4px solid #6db33f;
+  border-left: 4px solid lightblue;
   background-color: #EBF1E7;
   padding: 25px 20px;
   font-family: "Montserrat", sans-serif;
@@ -228,17 +228,17 @@
   padding-top: 30px;
 }
 .blog-comments--wrapper .blog-comments--container {
-  border: 1px solid #34302d;
+  border: 1px solid blue;
 }
 .blog-comments--wrapper .blog-comments--container .blog-comments--header {
-  background-color: #34302d;
+  background-color: blue;
   color: #f1f1f1;
   font-size: 14px;
   line-height: 14px;
   padding: 18px;
 }
 .blog-comments--wrapper .blog-comments--container .blog-comments--header a {
-  color: #6db33f;
+  color: lightblue;
 }
 .blog-comments--wrapper .blog-comments--container .blog-comments--header .icon {
   margin-top: -11px;

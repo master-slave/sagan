@@ -38,7 +38,7 @@
 }
 
 .homepage--body .hero--banner {
-  background-color: #34302d;
+  background-color: blue;
   position: relative;
 }
 
@@ -82,7 +82,7 @@
 /* Spring IO Platform Banner */
 
 .homepage--body .hero--banner .platform {
-  background: url("../img/platform-bg.png") #34302d 50% 50% no-repeat;
+  background: url("../img/platform-bg.png") blue 50% 50% no-repeat;
   height: auto;
   text-align: center;
   padding: 60px 0;
@@ -109,7 +109,7 @@
 
 .homepage--body .hero--banner .springcloud10 {
   padding: 60px;
-  background: url("../img/hero-banner-springcloud10.jpg") #34302d no-repeat;
+  background: url("../img/hero-banner-springcloud10.jpg") blue no-repeat;
   background-size: cover;
 }
 
@@ -129,7 +129,7 @@
 }
 
 .homepage--body .key-feature--wrapper {
-  background-color: #6db33f;
+  background-color: lightblue;
   padding: 60px 0;
 }
 .homepage--body .key-feature--wrapper .key-feature--container {
@@ -173,13 +173,13 @@
   line-height: 30px;
   font-family: "Montserrat", sans-serif;
   margin-bottom: 20px;
-  color: #34302d;
+  color: blue;
 }
 .homepage--body .offset-feature--container .offset-feature--text {
   font-size: 18px;
   line-height: 28px;
   margin-bottom: 20px;
-  color: #34302d;
+  color: blue;
 }
 .homepage--body .offset-feature--container .offset-feature--link {
   color: #5fa134;

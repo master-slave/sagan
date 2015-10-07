@@ -124,8 +124,8 @@
 .post-tag {
     color: #5fa134;
     background-color: #d8ebcc;
-    border-bottom: 1px solid #6db33f;
-    border-right: 1px solid #6db33f;
+    border-bottom: 1px solid lightblue;
+    border-right: 1px solid lightblue;
     padding: 3px 4px 3px 4px;
     margin: 2px 2px 2px 0;
     text-decoration: none;
@@ -137,9 +137,9 @@
 
 a.post-tag:hover {
     color: #fff;
-	background-color: #6db33f;
-    border-bottom: 1px solid #6db33f;
-    border-right: 1px solid #6db33f;
+	background-color: lightblue;
+    border-bottom: 1px solid lightblue;
+    border-right: 1px solid lightblue;
     text-decoration: none;
 }
 

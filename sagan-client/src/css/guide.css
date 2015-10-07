@@ -1,7 +1,7 @@
 @import "filterable-list.css";
 
 .guides-section--container {
-  border: 1px solid #34302d;
+  border: 1px solid blue;
   min-height: 284px;
   margin-top: 50px;
   display: block !important;
@@ -10,7 +10,7 @@
   margin-top: 0;
 }
 .guides-section--container .section-title--container {
-  background-color: #34302d;
+  background-color: blue;
   color: #eeeeee;
   padding: 40px 0;
   margin: -40px 40px 40px -40px;

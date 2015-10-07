@@ -8,13 +8,13 @@
   <div layout:fragment="mobile-nav">
     <div class="mobile-navigation--wrapper mobile-only">
       <div class="navigation-drawer--container">
-        <div class="mobile-search--container">
+     <!--   <div class="mobile-search&#45;&#45;container">
           <form class="form-inline form-search" th:action="@{/search}" action="/search" method="get">
-            <button type="submit" class="search-form--submit"><i class="icon-search"></i></button>
-            <input type="text" class="search-query search-form--form js-search-input" placeholder="Search..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
+            <button type="submit" class="search-form&#45;&#45;submit"><i class="icon-search"></i></button>
+            <input type="text" class="search-query search-form&#45;&#45;form js-search-input" placeholder="Search..." name="q" th:value="${searchForm != null ? searchForm.q : ''}" />
           </form>
-        </div>
-        <div class="navigation-item-list">
+        </div>-->
+ <!--       <div class="navigation-item-list">
           <div th:class="${beans.uih.navClass(navSection?:'','')}">
             <a th:href="@{/}" href="/">
               Home
@@ -45,7 +45,7 @@
               <i class="icon-chevron-right pull-right"></i>
             </a>
           </div>
-        </div>
+        </div>-->
       </div>
       <div class="mobile-nav">
         <div class="nav-icon js-open-nav-drawer">

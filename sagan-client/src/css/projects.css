@@ -15,7 +15,7 @@
 }
 
 .project--container {
-  border: 1px solid #34302d;
+  border: 1px solid blue;
   display: inline-block;
   width: 21.8%;
   height: 340px;
@@ -117,7 +117,7 @@
   height: 0;
   border-top: 40px solid transparent;
   border-bottom: 40px solid transparent;
-  border-left: 40px solid #6db33f;
+  border-left: 40px solid lightblue;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
@@ -144,7 +144,7 @@
   font-size: 12px;
 }
 .project--container.project--container--link {
-  color: #34302d;
+  color: blue;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -153,8 +153,8 @@
 }
 .project--container.project--container--link:hover {
   text-decoration: none;
-  box-shadow: 0 0 3px #6db33f;
-  border-color: #6db33f;
+  box-shadow: 0 0 3px lightblue;
+  border-color: lightblue;
 }
 .project--container.project--container--link:active {
   box-shadow: none;
@@ -202,7 +202,7 @@
   text-decoration: none;
 }
 .project-header--wrapper .project--links--container .project-link:hover [class^=icon-] {
-  color: #6db33f;
+  color: lightblue;
 }
 .project-header--wrapper .project--links--container .project-link div.icon {
   margin-top: 3px;
@@ -260,12 +260,12 @@
 }
 
 .quickstart--container {
-  border: 1px solid #34302d;
+  border: 1px solid blue;
 }
 .quickstart--container .quickstart--title {
   font-family: "Montserrat", sans-serif;
   color: #f1f1f1;
-  background-color: #34302d;
+  background-color: blue;
   font-size: 16px;
   line-height: 16px;
   padding: 17px 0;
@@ -280,7 +280,7 @@
 }
 .quickstart--container .quickstart--dropdown .item-dropdown--title {
   padding: 9px 0 7px 20px;
-  border: 1px solid #34302d;
+  border: 1px solid blue;
 }
 .quickstart--container .quickstart--dropdown .item-dropdown--title .icon {
   margin: -3px 0 0 6px;
@@ -288,7 +288,7 @@
 }
 .quickstart--container .quickstart--dropdown .item-dropdown--icon {
   padding: 9px;
-  background-color: #34302d;
+  background-color: blue;
 }
 .quickstart--container .quickstart--dropdown .project-version--dropdown {
   width: 100%%;
@@ -318,7 +318,7 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 .quickstart--container .quickstart--dropdown.js-open .item-dropdown--title {
-  border: 1px solid #6db33f;
+  border: 1px solid lightblue;
 }
 .quickstart--container .quickstart--dropdown:hover .item-dropdown--icon {
   color: white;
@@ -328,11 +328,11 @@
 }
 
 .project-documentation--container {
-  border-color: #34302d;
+  border-color: blue;
 }
 .project-documentation--container .item-dropdown--title {
   background-color: transparent;
-  border-bottom: 1px solid #34302d;
+  border-bottom: 1px solid blue;
   padding: 20px;
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
@@ -348,7 +348,7 @@
 }
 .project-documentation--container .item--dropdown .item--body-title {
   padding-top: 15px;
-  color: #34302d;
+  color: blue;
   margin: 0 20px;
   border-color: #d7d5d3;
 }
@@ -357,7 +357,7 @@
   border-color: #d7d5d3;
 }
 .project-documentation--container .item--dropdown .item--body--version p {
-  color: #34302d;
+  color: blue;
   display: inline-block;
 }
 .project-documentation--container .item--dropdown .item--body--version .icon {
@@ -365,7 +365,7 @@
   margin: 2px 0 0 6px;
 }
 .project-documentation--container .item--dropdown .item--body--version .icon.icon-pre-release {
-  background-color: #34302d;
+  background-color: blue;
   border-radius: 2px;
 }
 .project-documentation--container .item--dropdown .item--body--version:last-child {
@@ -415,7 +415,7 @@
 .github-fork-ribbon--wrapper .github-fork-ribbon {
   position: absolute;
   padding: 2px 0;
-  background-color: #34302d;
+  background-color: blue;
   -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.33);
   z-index: 9999;

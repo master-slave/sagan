@@ -1,6 +1,6 @@
 .team-map--wrapper #map {
   height: 425px;
-  border-bottom: 1px solid #34302d;
+  border-bottom: 1px solid blue;
 }
 .team-map--wrapper .team-map--container {
   position: absolute;
@@ -132,7 +132,7 @@
   margin: -2px 5px 0 0;
 }
 .team-members--wrapper .member-post--container .meta-data--container .meta-data--item a {
-  color: #34302d;
+  color: blue;
 }
 .team-members--wrapper .member-post--container .meta-data--container .meta-data--item a:hover {
   text-decoration: none;
@@ -242,10 +242,10 @@
 
 .member-twitter--wrapper {
   width: 270px;
-  border: 1px solid #34302d;
+  border: 1px solid blue;
 }
 .member-twitter--wrapper .member-twitter--header {
-  background-color: #34302d;
+  background-color: blue;
   padding: 15px 20px;
 }
 .member-twitter--wrapper .member-twitter--header .twitter-handle {
@@ -253,7 +253,7 @@
   display: inline-block;
 }
 .member-twitter--wrapper .member-twitter--header .twitter-follow-btn {
-  border: 2px solid #6db33f;
+  border: 2px solid lightblue;
   color: #eeeeee;
   font-size: 12px;
   line-height: 12px;
@@ -271,7 +271,7 @@
   margin-right: 3px;
 }
 .member-twitter--wrapper .member-twitter--header .twitter-follow-btn:hover {
-  background-color: #6db33f;
+  background-color: lightblue;
   text-decoration: none;
   color: white;
 }
@@ -279,7 +279,7 @@
   color: white;
 }
 .member-twitter--wrapper .member-twitter--header .twitter-follow-btn:active {
-  background-color: #6db33f;
+  background-color: lightblue;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
   border: none;
   padding: 8px 11px;

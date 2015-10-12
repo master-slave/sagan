@@ -71,10 +71,11 @@ github:
 
   # Coordinates for finding guides against the GitHub API
   guides:
+    path:
     owner:
       name: ${GITHUB_GUIDES_OWNER_NAME:tec-stack} # any GitHub org or user having publicly-readable guide repos
       type: ${GITHUB_GUIDES_OWNER_TYPE:users}          # 'users' is the other possible value
-
+    offline: ${GITHUB_GUIDES_OFFLINE:false}
 elasticsearch:
   client:
     endpoint: ${ELASTICSEARCH_ENDPOINT:http://localhost:9200}
@@ -125,6 +126,10 @@ spring:
 cache:
   timetolive: 0
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io-localhost}
+github:
+  guides:
+    path: C:/projects/slavisa/guides
+    offline: ${GITHUB_GUIDES_OFFLINE:true}
 ---
 
 spring:

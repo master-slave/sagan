@@ -3,6 +3,7 @@ package sagan.guides.support;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
@@ -44,11 +45,14 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
     private final MultiValueMap<String, String> tagMultimap = new LinkedMultiValueMap<>();
     private final ProjectMetadataService projectMetadataService;
     private final AsciidoctorUtils asciidoctorUtils = new AsciidoctorUtils();
+    private final Boolean offline;
+
 
     @Autowired
-    public GettingStartedGuides(GuideOrganization org, ProjectMetadataService projectMetadataService) {
+    public GettingStartedGuides(GuideOrganization org, ProjectMetadataService projectMetadataService, @Value("${github.guides.offline}") Boolean offline) {
         this.org = org;
         this.projectMetadataService = projectMetadataService;
+        this.offline = offline;
     }
 
     @Override
@@ -57,7 +61,7 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
         String repoName = REPO_PREFIX + guide;
         String description = getRepoDescription(repoName);
         Set<String> tags = tagMultimap.get(repoName) != null ? new HashSet<>(tagMultimap.get(repoName)) : Collections.emptySet();
-        GettingStartedGuide gsgGuide =  new GettingStartedGuide(
+        GettingStartedGuide gsgGuide = new GettingStartedGuide(
                 new DefaultGuideMetadata(org.getName(), guide, repoName, description, tags));
         return populate(gsgGuide);
     }
@@ -66,8 +70,8 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
     public List<GettingStartedGuide> findAll() {
         return findAllMetadata()
                 .stream()
-                    .map(GettingStartedGuide::new)
-                    .map(this::populate)
+                .map(GettingStartedGuide::new)
+                .map(this::populate)
                 .collect(Collectors.toList());
     }
 
@@ -78,7 +82,7 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
                 .stream()
                 .map(repo -> new DefaultGuideMetadata(org.getName(), repo.getName().replaceAll("^" + REPO_PREFIX, ""),
                         repo.getName(), repo.getDescription(),
-                        new HashSet<String>(tagMultimap.getOrDefault(repo.getName(), Collections.emptyList()))))
+                        new HashSet<>(tagMultimap.getOrDefault(repo.getName(), Collections.emptyList()))))
                 .collect(Collectors.toList());
     }
 
@@ -86,7 +90,13 @@ public class GettingStartedGuides implements DocRepository<GettingStartedGuide, 
     public GettingStartedGuide populate(GettingStartedGuide guide) {
         String repoName = guide.getRepoName();
 
-        AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, String.format(README_PATH_ASC, org.getName(), repoName));
+        String formattedPath;
+        if (!offline) {
+            formattedPath = String.format(README_PATH_ASC, org.getName(), repoName);
+        } else {
+            formattedPath = repoName;
+        }
+        AsciidocGuide asciidocGuide = asciidoctorUtils.getDocument(org, formattedPath);
         asciidocGuide.getTags().forEach(tag -> tagMultimap.set(guide.getRepoName(), tag));
         guide.setContent(asciidocGuide.getContent());
         guide.setSidebar(asciidoctorUtils.generateDynamicSidebar(projectMetadataService, asciidocGuide));

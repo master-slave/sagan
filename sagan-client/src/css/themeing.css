@@ -1,0 +1,71 @@
+/*Themeing Header*/
+.header--navbar .navbar-inner {
+    background-color: darkblue;
+}
+
+.header--navbar .navbar-inner .navbar-link.active a, .header--navbar .navbar-inner .navbar-link a:hover {
+    background-color: cornflowerblue;
+    box-shadow: none;
+}
+
+.header--navbar .navbar-inner {
+    border-color: lightblue;
+}
+
+/*Themeing pages*/
+.homepage--body .key-feature--wrapper {
+    background-color: lightblue;
+}
+
+.homepage--body .offset-feature--container.feature-guides {
+    background-image: none;
+}
+
+
+.homepage--body .offset-feature--container .offset-feature--link {
+    color: cornflowerblue;
+}
+
+.content--title {
+    border-top: 3px solid cornflowerblue;
+}
+
+.content--container a {
+    color: cornflowerblue;
+}
+
+.go-to-repo--container a {
+    color: cornflowerblue;
+}
+
+.btn.btn-black {
+    border: 2px solid lightblue;
+}
+
+.right-pane-widget--container li a {
+    color: cornflowerblue;
+}
+
+/* Themeing Footer */
+.footer {
+    background-color: darkblue;
+    color: white;
+}
+
+.footer a {
+    color: cornflowerblue;
+}
+
+@media (max-width: 800px) {
+    .mobile-navigation--wrapper .mobile-nav {
+        background-color: darkblue;
+    }
+
+    .mobile-navigation--wrapper .navigation-drawer--container {
+        background-color: darkblue;
+    }
+
+    .mobile-navigation--wrapper .navigation-drawer--container .navigation-item-list .navbar-link.active a {
+        background-color: lightblue;
+    }
+}

@@ -41,6 +41,8 @@ class GuideOrganization {
     private final String type;
     private final GitHubClient gitHub;
     private final String name;
+    private final Boolean offline;
+    private final String offlinePath;
     private final ObjectMapper objectMapper;
     private final Asciidoctor asciidoctor;
     private final Yaml yaml = new Yaml();
@@ -48,10 +50,14 @@ class GuideOrganization {
     @Autowired
     public GuideOrganization(@Value("${github.guides.owner.name}") String name,
                              @Value("${github.guides.owner.type}") String type,
+                             @Value("${github.guides.offline}") Boolean offline,
+                             @Value("${github.guides.path}") String offlinePath,
                              GitHubClient gitHub,
                              ObjectMapper objectMapper) {
         this.name = name;
         this.type = type;
+        this.offline = offline;
+        this.offlinePath = offlinePath;
         this.gitHub = gitHub;
         this.objectMapper = objectMapper;
         this.asciidoctor = Asciidoctor.Factory.create();
@@ -75,43 +81,40 @@ class GuideOrganization {
     }
 
     public AsciidocGuide getAsciidocGuide(String path) {
-        final String htmlContent;
-        final Map<String, List<String>> frontMatter;
-        final HashSet<String> tags;
-        final HashSet<String> projects;
-        final String tableOfContents;
-        final Map<String, String> understandingDocs;
-
-        byte[] download = gitHub.sendRequestForDownload(path);
-
-        String tempFilePrefix = path.replace("/", "-");
+        AsciidocGuide asciidocGuide;
+        String tempFilePrefix = null;
         try {
-            // First, write the downloaded stream of bytes into a file
-            File zipball = File.createTempFile(tempFilePrefix, ".zip");
-            zipball.deleteOnExit();
-            FileOutputStream zipOut = new FileOutputStream(zipball);
-            zipOut.write(download);
-            zipOut.close();
 
-            // Open the zip file and unpack it
-            File unzippedRoot;
-            try (ZipFile zipFile = new ZipFile(zipball)) {
-                unzippedRoot = null;
-                for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements();) {
-                    ZipEntry entry = e.nextElement();
-                    if (entry.isDirectory()) {
-                        File dir = new File(zipball.getParent() + File.separator + entry.getName());
-                        dir.mkdir();
-                        if (unzippedRoot == null) {
-                            unzippedRoot = dir; // first directory is the root
-                        }
-                    } else {
-                        StreamUtils.copy(zipFile.getInputStream(entry),
-                                new FileOutputStream(zipball.getParent() + File.separator + entry.getName()));
-                    }
-                }
+            if (!offline) {
+                tempFilePrefix = path.replace("/", "-");
+                byte[] download = gitHub.sendRequestForDownload(path);
+                File unzippedRoot;
+
+                File zipball = zipDownloadedBytes(tempFilePrefix, download);
+                unzippedRoot = openUnpackZip(zipball);
+                asciidocGuide = getAsciidocGuide(tempFilePrefix, unzippedRoot);
+                // Delete the zipball and the unpacked content
+                FileSystemUtils.deleteRecursively(zipball);
+                FileSystemUtils.deleteRecursively(unzippedRoot);
+
+            } else {
+                asciidocGuide = getAsciidocGuide(path, new File(offlinePath + File.separator + path));
             }
+        } catch (IOException ex) {
+            throw new IllegalStateException("Could not create temp file for source: " + tempFilePrefix);
+        }
 
+        return asciidocGuide;
+    }
+
+    private AsciidocGuide getAsciidocGuide(String tempFilePrefix, File unzippedRoot) {
+        String htmlContent;
+        Map<String, List<String>> frontMatter;
+        HashSet<String> tags;
+        HashSet<String> projects;
+        String tableOfContents;
+        Map<String, String> understandingDocs;
+        try {
             // Process the unzipped guide through asciidoctor, rendering HTML content
             Attributes attributes = new Attributes();
             attributes.setAllowUriRead(true);
@@ -145,14 +148,44 @@ class GuideOrganization {
             tableOfContents = findTableOfContents(doc);
             understandingDocs = findUnderstandingLinks(doc);
 
-            // Delete the zipball and the unpacked content
-            FileSystemUtils.deleteRecursively(zipball);
-            FileSystemUtils.deleteRecursively(unzippedRoot);
+
         } catch (IOException ex) {
             throw new IllegalStateException("Could not create temp file for source: " + tempFilePrefix);
         }
 
         return new AsciidocGuide(htmlContent, tags, projects, tableOfContents, understandingDocs);
+    }
+
+    private File openUnpackZip(File zipball) throws IOException {
+        // Open the zip file and unpack it
+        File unzippedRoot;
+        try (ZipFile zipFile = new ZipFile(zipball)) {
+            unzippedRoot = null;
+            for (Enumeration<? extends ZipEntry> e = zipFile.entries(); e.hasMoreElements(); ) {
+                ZipEntry entry = e.nextElement();
+                if (entry.isDirectory()) {
+                    File dir = new File(zipball.getParent() + File.separator + entry.getName());
+                    dir.mkdir();
+                    if (unzippedRoot == null) {
+                        unzippedRoot = dir; // first directory is the root
+                    }
+                } else {
+                    StreamUtils.copy(zipFile.getInputStream(entry),
+                            new FileOutputStream(zipball.getParent() + File.separator + entry.getName()));
+                }
+            }
+        }
+        return unzippedRoot;
+    }
+
+    private File zipDownloadedBytes(String tempFilePrefix, byte[] download) throws IOException {
+        // First, write the downloaded stream of bytes into a file
+        File zipball = File.createTempFile(tempFilePrefix, ".zip");
+        zipball.deleteOnExit();
+        FileOutputStream zipOut = new FileOutputStream(zipball);
+        zipOut.write(download);
+        zipOut.close();
+        return zipball;
     }
 
     /**
@@ -191,15 +224,15 @@ class GuideOrganization {
         Elements toc = doc.select("div#toc > ul.sectlevel1");
 
         toc.select("ul.sectlevel2").forEach(subsection ->
-            subsection.remove()
+                        subsection.remove()
         );
 
         toc.forEach(part ->
-            part.select("a[href]").stream()
-                .filter(anchor ->
-                    doc.select(anchor.attr("href")).get(0).parent().classNames().stream()
-                        .anyMatch(clazz -> clazz.startsWith("reveal")))
-                .forEach(href -> href.parent().remove())
+                        part.select("a[href]").stream()
+                                .filter(anchor ->
+                                        doc.select(anchor.attr("href")).get(0).parent().classNames().stream()
+                                                .anyMatch(clazz -> clazz.startsWith("reveal")))
+                                .forEach(href -> href.parent().remove())
         );
 
         return toc.toString();
@@ -238,13 +271,18 @@ class GuideOrganization {
     }
 
     public GitHubRepo[] findAllRepositories() {
-        String json = gitHub.sendRequestForJson("/{type}/{name}/repos?per_page=100", type, name);
-
+        String json = null;
+        if (!offline) {
+            json = gitHub.sendRequestForJson("/{type}/{name}/repos?per_page=100", type, name);
+        } else {
+            // TODO: create the same json from file system
+        }
         try {
             return objectMapper.readValue(json, GitHubRepo[].class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     public List<GitHubRepo> findRepositoriesByPrefix(String prefix) {

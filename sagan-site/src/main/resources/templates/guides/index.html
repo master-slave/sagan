@@ -6,20 +6,15 @@
     <title>Guides</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/guide.css}"/>
     <!-- http://opengraphprotocol.org/ -->
-    <meta property="og:title" content="Spring Guides" />
-    <meta property="og:image" th:content="@{/img/spring-by-pivotal.png}" />
-    <meta property="og:description" content="these guides are designed to get you productive as quickly as
-    possible and using the latest Spring project releases and techniques as recommended by the Spring team" />
+    <meta property="og:title" content="Tec-Stack Guides" />
+    <meta property="og:description" content="Tutorials, guides and blogs for all the technology enthusiasts" />
 </head>
 <body>
   <div layout:fragment="header-container"></div>
   <div layout:fragment="content" class="container-fluid">
     <main class="main-body--wrapper">
       <h1 class="index-page--title">Guides</h1>
-      <p class="index-page--subtitle with-subtext">Whatever you're building, these guides are designed to get you productive as quickly as possible &ndash; using the latest Spring project releases and techniques as recommended by the <a href="/team">Spring team</a>.<br/>
-        <span class="subtext">
-          Have a suggestion for a new guide? Let us know at <a href="https://twitter.com/intent/tweet?text=@springcentral&related=springcentral&hashtags=guides">@springcentral</a>.
-        </span>
+      <p class="index-page--subtitle with-subtext">Quick getting started guides<br/>
       </p>
 
       <a name="gs"></a>
@@ -32,7 +27,7 @@
             <div class="content-section-title--container">
               <div class="pull-left icon icon-gs-guides"></div>
               <h3 class="content-section-title no-border no-margin">Getting Started Guides</h3>
-              <p class="content-section-sub-title">Designed to be completed in 15-30 minutes, these guides provide quick, hands-on instructions for building the "Hello World" of any development task with Spring. In most cases, the only prerequisites are a JDK and a text editor.</p>
+              <p class="content-section-sub-title"></p>
             </div>
 
             <div th:each="guide : ${guides}" class="guide--container" th:attr="data-filterable=${guide.title}+' '+${guide.subtitle}+' '+${guide.tags}">
@@ -41,20 +36,20 @@
             </div>
           </div>
         </section>
-        <section class="content-container--body">
+<!--        <section class="content-container&#45;&#45;body">
           <div data-filterable-container>
-            <div class="content-section-title--container">
+            <div class="content-section-title&#45;&#45;container">
               <div class="pull-left icon icon-tutorial"></div>
               <a name="tutorials"></a>
               <h3 class="content-section-title no-margin">Tutorials</h3>
-              <p class="content-section-sub-title">Designed to be completed in 2-3 hours, these guides provide deeper, in-context explorations of enterprise application development topics, leaving you ready to implement real-world solutions.</p>
+              <p class="content-section-sub-title"></p>
             </div>
-            <div th:each="tutorial : ${tutorials}" class="guide--container" th:attr="data-filterable=${tutorial.title}+' '+${tutorial.subtitle}">
-              <a class="guide--title" th:href="@{'/guides/tutorials/'+${tutorial.guideId}+'/'}" th:text="${tutorial.title}"></a>
-              <p class="guide--subtitle" th:text="${tutorial.subtitle}"></p>
+            <div th:each="tutorial : ${tutorials}" class="guide&#45;&#45;container" th:attr="data-filterable=${tutorial.title}+' '+${tutorial.subtitle}">
+              <a class="guide&#45;&#45;title" th:href="@{'/guides/tutorials/'+${tutorial.guideId}+'/'}" th:text="${tutorial.title}"></a>
+              <p class="guide&#45;&#45;subtitle" th:text="${tutorial.subtitle}"></p>
             </div>
           </div>
-        </section>
+        </section>-->
       </div>
     </main>
   </div>

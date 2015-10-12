@@ -32,7 +32,7 @@ public class GuidesOrgTests {
 
     @Before
     public void setUp() throws Exception {
-        service = new GuideOrganization(OWNER_NAME, OWNER_TYPE, ghClient, new ObjectMapper());
+        service = new GuideOrganization(OWNER_NAME, OWNER_TYPE, false, "", ghClient, new ObjectMapper());
     }
 
     @Test

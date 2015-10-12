@@ -32,7 +32,7 @@ public class DynamicSidebarTests {
     @Before
     public void setup() throws IOException {
         initMocks(this);
-        org = new GuideOrganization("spring-guides", "orgs", github, new ObjectMapper());
+        org = new GuideOrganization("spring-guides", "orgs", false, "", github, new ObjectMapper());
     }
 
     @Test

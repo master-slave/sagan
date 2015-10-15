@@ -8,7 +8,6 @@ def final PRODUCTION_SPACE = 'production'
 def final STAGING_SPACE = 'staging'
 
 def siteProject = project(':sagan-site')
-def indexerProject = project(':sagan-indexer')
 
 // Gather information about the build environment. Is it a Travis CI build?
 def travisBranch = System.getenv().get("TRAVIS_BRANCH")
@@ -42,11 +41,6 @@ task deploy(dependsOn: [ build, rootProject.gitMetadata ]) {
         // the site gets blue-green deployment
         if (project.name == siteProject.name)
             dependsOn 'cfDeploy', 'cfSwapDeployed'
-
-        // the indexer just needs to be pushed
-        else if (project.name == indexerProject.name)
-            dependsOn 'cfPush'
-
         else
             throw new IllegalArgumentException('Unknown project ${project.name}')
     }
@@ -82,11 +76,6 @@ if (project.name == siteProject.name) {
         variants = ['-blue', '-green']
     }
 }
-if (project.name == indexerProject.name) {
-    cloudfoundry {
-        instances = 1
-    }
-}
 
 // These deployment properties can be set on the command line with "-P" options, in "gradle.properties",
 // or in "~/.gradle/sagan-env.gradle". All are required if the respective 'cfLogin' / 'deploy' tasks
@@ -106,7 +95,7 @@ gradle.taskGraph.whenReady {
         // We should have everything we need in order to deploy. Check for required credentials
         // and populate cloudfoundry environment variables.
         if (gradle.taskGraph.hasTask(":${siteProject.name}:cfLogin")
-                || gradle.taskGraph.hasTask(":${indexerProject.name}:cfLogin")) {
+                ) {
             def missingVars = []
 
             if (!project.hasProperty('cfUsername')) {
@@ -123,7 +112,7 @@ gradle.taskGraph.whenReady {
         }
 
         if (gradle.taskGraph.hasTask(":${siteProject.name}:${deploy.name}")
-                || gradle.taskGraph.hasTask(":${indexerProject.name}:${deploy.name}")) {
+                ) {
             def missingVars = []
             reqDeployVars.each { var ->
                 if (!project.hasProperty(var)) {

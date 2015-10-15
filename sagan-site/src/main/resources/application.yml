@@ -141,3 +141,7 @@ disqus_shortname: ${DISQUS_SHORTNAME:spring-io-staging}
 spring:
   profiles: production
 disqus_shortname: ${DISQUS_SHORTNAME:spring-io}
+github:
+  guides:
+    path:
+    offline: ${GITHUB_GUIDES_OFFLINE:false}

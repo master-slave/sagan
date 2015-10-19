@@ -9,7 +9,7 @@ info:
     name: ${project.name}
     description: ${project.description}
   spring:
-    profiles: ${spring.profiles.active:production}
+    profiles: ${spring.profiles.active:default}
   app:
     name: ${vcap.application.name:sagan}:${vcap.application.instance_index:*}
     start: ${vcap.application.start:N/A}
@@ -109,6 +109,13 @@ logging:
 
 spring:
   profiles: staging,production
+security:
+  require_ssl: true
+server:
+  # when deployed to CloudFoundry, tomcat is behind a CDN proxy
+  tomcat:
+    remote_ip_header: x-forwarded-for
+    protocol_header: x-forwarded-proto
   github:
     guides:
       offline: false
